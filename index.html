@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Signs - Instituto Emiliani 8°A</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Marca de agua con letras de lenguaje de señas */
+        body::before {
+            content: "🤟 ✋ 👌 🤏 ✌️ 🤞 👍 🤘 👋 ☝️ 🤙 👆 🖖 🤚 ✊ 👊 🤛 🤜 👏 🙌";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            font-size: 3rem;
+            color: rgba(200, 200, 200, 0.25);
+            z-index: -1;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-around;
+            padding: 2rem;
+            pointer-events: none;
+        }
+
+        /* Navegación */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            color: #007bff;
+            background: rgba(0, 123, 255, 0.1);
+        }
+
+        /* Secciones */
+        section {
+            min-height: 100vh;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Sección Hero */
+        #hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                url('/placeholder.svg?height=1080&width=1920&text=People+Sign+Language+Communication') center/cover;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        #hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        #hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        #hero .description {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.8;
+        }
+
+        /* Títulos de sección */
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #007bff;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: #007bff;
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* Sección Integrantes */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .member-card {
+            background: rgba(0, 123, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid rgba(0, 123, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 123, 255, 0.2);
+        }
+
+        .member-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-role {
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Sección Descripción */
+        .description-content {
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .description-content h3 {
+            color: #007bff;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .description-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);
+        }
+
+        .highlight-box h3 {
+            color: white !important;
+        }
+
+        /* Secciones adicionales */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0, 123, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+
+            #hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+                padding: 0.3rem 0.8rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 1rem;
+            }
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Scroll suave */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .member-photo {
+            margin-bottom: 1rem;
+        }
+
+        .member-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #007bff;
+            transition: transform 0.3s ease;
+        }
+
+        .member-image:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav>
+        <ul>
+            <li><a href="#hero">Inicio</a></li>
+            <li><a href="#integrantes">Integrantes</a></li>
+            <li><a href="#descripcion">Descripción</a></li>
+            <li><a href="#problema">Planteamiento</a></li>
+            <li><a href="#justificacion">Justificación</a></li>
+            <li><a href="#cronograma">Cronograma</a></li>
+            <li><a href="#tecnologia">Tecnología</a></li>
+            <li><a href="#diagrama">Diagrama</a></li>
+            <li><a href="#algoritmo">Algoritmo</a></li>
+            <li><a href="#codigo">Código</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección 1: Hero -->
+    <section id="hero">
+        <div class="container">
+            <h1>Smart Signs</h1>
+            <p class="subtitle">Grupo 3 - Grado 8° "A"</p>
+            <p class="description">
+                Innovación tecnológica para la comunicación inclusiva mediante
+                lenguaje de señas y tecnología Arduino
+            </p>
+        </div>
+    </section>
+
+    <!-- Sección 2: Integrantes -->
+    <section id="integrantes">
+        <div class="container">
+            <h2 class="section-title">Nuestro Equipo</h2>
+            <div class="members-grid">
+                <div class="member-card">
+                    <div class="member-photo">
+                        <img src="./placeholder.svg?height=150&width=150&text=Foto" alt="Jhon Doe" class="member-image">
+                    </div>
+                    <div class="member-name">Jhon Doe</div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo">
+                        <img src="./placeholder.svg?height=150&width=150&text=Foto" alt="Jhon Doe" class="member-image">
+                    </div>
+                    <div class="member-name">Jhon Doe</div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo">
+                        <img src="./placeholder.svg?height=150&width=150&text=Foto" alt="Jhon Doe" class="member-image">
+                    </div>
+                    <div class="member-name">Jhon Doe</div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo">
+                        <img src="./placeholder.svg?height=150&width=150&text=Foto" alt="Jhon Doe" class="member-image">
+                    </div>
+                    <div class="member-name">Jhon Doe</div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo">
+                        <img src="./placeholder.svg?height=150&width=150&text=Foto" alt="Jhon Doe" class="member-image">
+                    </div>
+                    <div class="member-name">Jhon Doe</div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo">
+                        <img src="./placeholder.svg?height=150&width=150&text=Foto" alt="Jhon Doe" class="member-image">
+                    </div>
+                    <div class="member-name">Jhon Doe</div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo">
+                        <img src="./placeholder.svg?height=150&width=150&text=Foto" alt="Jhon Doe" class="member-image">
+                    </div>
+                    <div class="member-name">Jhon Doe</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 3: Descripción del Proyecto -->
+    <section id="descripcion">
+        <div class="container">
+            <h2 class="section-title">Descripción del Proyecto</h2>
+            <div class="description-content">
+                <h3>¿Qué es Smart Signs?</h3>
+                <p>
+                    Smart Signs es un proyecto innovador desarrollado por estudiantes del grado 8° "A"
+                    del Instituto Emiliani en El Salvador, que busca revolucionar la comunicación para personas con
+                    discapacidad auditiva mediante el uso de tecnología Arduino y sensores avanzados.
+                </p>
+
+                <div class="highlight-box">
+                    <h3>🎯 Objetivo Principal</h3>
+                    <p>
+                        Crear un guante inteligente que detecte los movimientos de los dedos y traduzca
+                        automáticamente las señas del lenguaje de señas salvadoreño a texto o voz,
+                        facilitando la comunicación entre personas sordas y oyentes.
+                    </p>
+                </div>
+
+                <h3>Nuestra Solución</h3>
+                <p>
+                    Hemos desarrollado un guante equipado con sensores de flexión que capturan los
+                    movimientos de cada dedo, procesando esta información a través de un microcontrolador
+                    Arduino para interpretar las letras del alfabeto en lenguaje de señas.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 4: Planteamiento del Problema -->
+    <section id="problema">
+        <div class="container">
+            <h2 class="section-title">Planteamiento del Problema</h2>
+            <div class="description-content">
+                <h3>Problemática Identificada</h3>
+                <p>
+                    En El Salvador, una significativa población presenta algún tipo de discapacidad
+                    auditiva. La barrera comunicativa entre la comunidad sorda y oyente limita las
+                    oportunidades de inclusión social, educativa y laboral en nuestro país.
+                </p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🚫</div>
+                        <h3>Barreras de Comunicación</h3>
+                        <p>Dificultad para comunicarse entre personas sordas y oyentes en espacios públicos, educativos y laborales.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3>Limitaciones Educativas</h3>
+                        <p>Acceso restringido a oportunidades educativas debido a la falta de intérpretes y herramientas tecnológicas.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💼</div>
+                        <h3>Exclusión Laboral</h3>
+                        <p>Menor acceso a empleos por las dificultades de comunicación en entornos profesionales.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h3>Costo de Tecnologías</h3>
+                        <p>Las soluciones tecnológicas existentes son costosas y poco accesibles para la población salvadoreña.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 5: Justificación -->
+    <section id="justificacion">
+        <div class="container">
+            <h2 class="section-title">Justificación del Proyecto</h2>
+            <div class="description-content">
+                <div class="highlight-box">
+                    <h3>🌟 ¿Por qué Smart Signs?</h3>
+                    <p>
+                        Este proyecto surge de la necesidad de crear una solución tecnológica accesible
+                        y económica que permita mejorar la calidad de vida de las personas con discapacidad
+                        auditiva en El Salvador, promoviendo su inclusión en todos los ámbitos de la sociedad.
+                    </p>
+                </div>
+
+                <h3>Impacto Social Esperado</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🤝</div>
+                        <h3>Inclusión Social</h3>
+                        <p>Facilitar la integración de personas sordas en actividades sociales y comunitarias.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎓</div>
+                        <h3>Acceso Educativo</h3>
+                        <p>Mejorar las oportunidades educativas eliminando barreras comunicativas.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🏥</div>
+                        <h3>Atención Médica</h3>
+                        <p>Facilitar la comunicación en centros de salud y emergencias médicas.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌍</div>
+                        <h3>Innovación Nacional</h3>
+                        <p>Posicionar a El Salvador como pionero en tecnología inclusiva en Centroamérica.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 6: Cronograma -->
+    <section id="cronograma">
+        <div class="container">
+            <h2 class="section-title">Cronograma de Actividades</h2>
+            <div class="description-content">
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📋</div>
+                        <h3>Fase 1: Investigación</h3>
+                        <p>Investigación sobre lenguaje de señas salvadoreño y tecnologías Arduino</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h3>Fase 2: Diseño</h3>
+                        <p>Diseño del circuito electrónico y selección de componentes</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Fase 3: Prototipado</h3>
+                        <p>Construcción del primer prototipo y pruebas iniciales</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💻</div>
+                        <h3>Fase 4: Programación</h3>
+                        <p>Desarrollo del código y algoritmos de reconocimiento</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🧪</div>
+                        <h3>Fase 5: Pruebas</h3>
+                        <p>Pruebas de funcionamiento y calibración del sistema</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Fase 6: Documentación</h3>
+                        <p>Elaboración de documentación técnica y presentación final</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 7: Tecnología -->
+    <section id="tecnologia">
+        <div class="container">
+            <h2 class="section-title">Tecnología Utilizada</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Arduino Uno</h3>
+                    <p>Microcontrolador principal que procesa las señales de los sensores y ejecuta el algoritmo de reconocimiento de señas.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📡</div>
+                    <h3>Sensores de Flexión</h3>
+                    <p>Cinco sensores de alta precisión ubicados en cada dedo para detectar el grado de flexión y posición.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧤</div>
+                    <h3>Guante Ergonómico</h3>
+                    <p>Diseño cómodo y ajustable que permite el uso prolongado sin causar fatiga o molestias.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h3>Software de Procesamiento</h3>
+                    <p>Algoritmo desarrollado en C++ que interpreta los datos de los sensores y los convierte en letras.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Interfaz de Usuario</h3>
+                    <p>Pantalla LCD que muestra en tiempo real las letras reconocidas y permite la formación de palabras.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔋</div>
+                    <h3>Sistema de Alimentación</h3>
+                    <p>Batería recargable de larga duración que garantiza horas de uso continuo del dispositivo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 8: Diagrama -->
+    <section id="diagrama">
+        <div class="container">
+            <h2 class="section-title">Diagrama del Sistema</h2>
+            <div class="description-content">
+                <div class="highlight-box">
+                    <h3>🔌 Diagrama de Conexiones</h3>
+                    <p>Esquema detallado de las conexiones entre Arduino, sensores y componentes del sistema Smart Signs.</p>
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <img src="/placeholder.svg?height=400&width=600&text=Diagrama+de+Conexiones+Arduino" alt="Diagrama de conexiones" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                    </div>
+                </div>
+
+                <h3>Componentes del Sistema</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎛️</div>
+                        <h3>Arduino Uno</h3>
+                        <p>Microcontrolador principal conectado a los pines analógicos A0-A4</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📡</div>
+                        <h3>Sensores de Flexión</h3>
+                        <p>5 sensores conectados a cada dedo del guante con resistencias pull-down</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📺</div>
+                        <h3>Display LCD</h3>
+                        <p>Pantalla 16x2 para mostrar las letras reconocidas</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔋</div>
+                        <h3>Alimentación</h3>
+                        <p>Batería de 9V con regulador de voltaje para estabilidad</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 9: Algoritmo -->
+    <section id="algoritmo">
+        <div class="container">
+            <h2 class="section-title">Flujograma del Algoritmo</h2>
+            <div class="description-content">
+                <div class="highlight-box">
+                    <h3>🔄 Proceso de Reconocimiento</h3>
+                    <p>Algoritmo que procesa las señales de los sensores para identificar las letras del alfabeto en lenguaje de señas.</p>
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <img src="/placeholder.svg?height=500&width=400&text=Flujograma+del+Algoritmo" alt="Flujograma del algoritmo" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                    </div>
+                </div>
+
+                <h3>Pasos del Algoritmo</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">1️⃣</div>
+                        <h3>Inicialización</h3>
+                        <p>Configuración de pines y calibración inicial de sensores</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">2️⃣</div>
+                        <h3>Lectura de Sensores</h3>
+                        <p>Captura continua de valores analógicos de los 5 sensores</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">3️⃣</div>
+                        <h3>Procesamiento</h3>
+                        <p>Conversión de valores analógicos a digitales y filtrado de ruido</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">4️⃣</div>
+                        <h3>Comparación</h3>
+                        <p>Comparación con patrones almacenados del alfabeto</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">5️⃣</div>
+                        <h3>Reconocimiento</h3>
+                        <p>Identificación de la letra correspondiente</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">6️⃣</div>
+                        <h3>Salida</h3>
+                        <p>Mostrar resultado en pantalla LCD</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 10: Código -->
+    <section id="codigo">
+        <div class="container">
+            <h2 class="section-title">Código del Proyecto</h2>
+            <div class="description-content">
+                <div class="highlight-box">
+                    <h3>💻 Código Arduino</h3>
+                    <p>Código principal desarrollado en C++ para el funcionamiento del guante Smart Signs.</p>
+                </div>
+
+                <div class="feature-card" style="text-align: left; margin: 2rem 0;">
+                    <h3>Código Principal (sketch.ino)</h3>
+                    <pre style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 1.4;">
+<code>// Smart Signs - Guante Traductor de Lenguaje de Señas
+// Instituto Emiliani - Grado 8° "A" - El Salvador
+
+#include &lt;LiquidCrystal.h&gt;
+
+// Configuración del LCD
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+// Pines de los sensores de flexión
+const int sensor1 = A0; // Pulgar
+const int sensor2 = A1; // Índice
+const int sensor3 = A2; // Medio
+const int sensor4 = A3; // Anular
+const int sensor5 = A4; // Meñique
+
+// Variables para almacenar lecturas
+int flex1, flex2, flex3, flex4, flex5;
+
+void setup() {
+  // Inicializar LCD
+  lcd.begin(16, 2);
+  lcd.print("Smart Signs");
+  lcd.setCursor(0, 1);
+  lcd.print("Iniciando...");
+
+  // Inicializar comunicación serie
+  Serial.begin(9600);
+
+  delay(2000);
+  lcd.clear();
+}
+
+void loop() {
+  // Leer sensores
+  flex1 = analogRead(sensor1);
+  flex2 = analogRead(sensor2);
+  flex3 = analogRead(sensor3);
+  flex4 = analogRead(sensor4);
+  flex5 = analogRead(sensor5);
+
+  // Procesar y reconocer letra
+  char letra = reconocerLetra(flex1, flex2, flex3, flex4, flex5);
+
+  // Mostrar en LCD
+  if (letra != ' ') {
+    lcd.clear();
+    lcd.print("Letra: ");
+    lcd.print(letra);
+  }
+
+  delay(500);
+}
+
+char reconocerLetra(int f1, int f2, int f3, int f4, int f5) {
+  // Algoritmo de reconocimiento de patrones
+  // (Código completo disponible en documentación técnica)
+
+  // Ejemplo para letra 'A'
+  if (f1 > 500 && f2 < 300 && f3 < 300 && f4 < 300 && f5 < 300) {
+    return 'A';
+  }
+
+  // Más patrones...
+
+  return ' '; // Sin reconocimiento
+}</code>
+                </pre>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📁</div>
+                    <h3>Archivos del Proyecto</h3>
+                    <p>• sketch.ino - Código principal<br>
+                    • patterns.h - Patrones de letras<br>
+                    • calibration.ino - Calibración<br>
+                    • README.md - Documentación</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Librerías Utilizadas</h3>
+                    <p>• LiquidCrystal.h - Control LCD<br>
+                    • Arduino.h - Funciones básicas<br>
+                    • EEPROM.h - Almacenamiento<br>
+                    • SoftwareSerial.h - Comunicación</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div style="text-align: center; padding: 2rem; background: rgba(0, 123, 255, 0.05); margin: 2rem 0; border-radius: 15px;">
+        <p style="text-align: center; margin-top: 2rem; font-size: 1.2rem; color: #007bff;">
+            <strong>¡Gracias por conocer nuestro proyecto Smart Signs!</strong><br>
+            Juntos construimos un futuro más inclusivo 🤟
+        </p>
+    </div>
+
+    <script>
+        // Animación suave al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-on-scroll');
+                }
+            });
+        }, observerOptions);
+
+        // Observar todas las tarjetas y elementos
+        document.querySelectorAll('.member-card, .feature-card, .description-content').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Efecto parallax sutil para el fondo de señas
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('body::before');
+            if (parallax) {
+                const speed = scrolled * 0.1;
+                document.body.style.setProperty('--scroll-offset', `${speed}px`);
+            }
+        });
+    </script>
+</body>
+</html>
