@@ -37,40 +37,12 @@
             justify-content: space-around;
             padding: 2rem;
             pointer-events: none;
+            animation: floatBackground 20s ease-in-out infinite;
         }
 
-        /* Navegación */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-        }
-
-        nav a:hover {
-            color: #007bff;
-            background: rgba(0, 123, 255, 0.1);
+        @keyframes floatBackground {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
 
         /* Secciones */
@@ -92,7 +64,7 @@
         /* Sección Hero */
         #hero {
             background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-                url('/placeholder.svg?height=1080&width=1920&text=People+Sign+Language+Communication') center/cover;
+                url('./background.jpeg?height=1080&width=1920&text=People+Sign+Language+Communication') center/cover;
             color: white;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
@@ -228,34 +200,104 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            #hero h1 {
-                font-size: 2.5rem;
-            }
+        @media (max-width: 1200px) {
+    .container {
+        max-width: 95%;
+    }
 
-            #hero .subtitle {
-                font-size: 1.2rem;
-            }
+    .feature-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+}
 
-            nav ul {
-                gap: 1rem;
-            }
+@media (max-width: 768px) {
+    #hero h1 {
+        font-size: 2.5rem;
+        letter-spacing: 1px;
+    }
 
-            nav a {
-                font-size: 0.9rem;
-                padding: 0.3rem 0.8rem;
-            }
+    #hero .subtitle {
+        font-size: 1.2rem;
+    }
 
-            .section-title {
-                font-size: 2rem;
-            }
+    #hero .description {
+        font-size: 1rem;
+    }
 
-            section {
-                padding: 1rem;
-            }
-        }
+    .section-title {
+        font-size: 2rem;
+    }
 
-        /* Animaciones */
+    section {
+        padding: 1.5rem 1rem;
+        min-height: auto;
+    }
+
+    .members-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .feature-card {
+        padding: 1.5rem;
+    }
+
+    .description-content {
+        text-align: center;
+    }
+
+    .highlight-box {
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    #hero h1 {
+        font-size: 2rem;
+    }
+
+    #hero .subtitle {
+        font-size: 1rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    section {
+        padding: 1rem 0.5rem;
+    }
+
+    .members-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .member-card {
+        padding: 1.5rem;
+    }
+
+    .feature-card {
+        padding: 1rem;
+    }
+
+    .feature-icon {
+        font-size: 2.5rem;
+    }
+
+    pre {
+        font-size: 0.8rem !important;
+        padding: 1rem !important;
+    }
+}
+
+        /* Animaciones CSS puras */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -267,8 +309,53 @@
             }
         }
 
-        .animate-on-scroll {
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Aplicar animaciones automáticamente */
+        .member-card {
             animation: fadeInUp 0.8s ease-out;
+            animation-delay: 0.2s;
+            animation-fill-mode: both;
+        }
+
+        .feature-card {
+            animation: slideInLeft 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .feature-card:nth-child(even) {
+            animation-name: slideInRight;
+        }
+
+        .description-content {
+            animation: fadeInUp 0.8s ease-out;
+            animation-delay: 0.1s;
+            animation-fill-mode: both;
+        }
+
+        .section-title {
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
         }
 
         /* Scroll suave */
@@ -295,27 +382,11 @@
     </style>
 </head>
 <body>
-    <!-- Navegación -->
-    <nav>
-        <ul>
-            <li><a href="#hero">Inicio</a></li>
-            <li><a href="#integrantes">Integrantes</a></li>
-            <li><a href="#descripcion">Descripción</a></li>
-            <li><a href="#problema">Planteamiento</a></li>
-            <li><a href="#justificacion">Justificación</a></li>
-            <li><a href="#cronograma">Cronograma</a></li>
-            <li><a href="#tecnologia">Tecnología</a></li>
-            <li><a href="#diagrama">Diagrama</a></li>
-            <li><a href="#algoritmo">Algoritmo</a></li>
-            <li><a href="#codigo">Código</a></li>
-        </ul>
-    </nav>
-
     <!-- Sección 1: Hero -->
     <section id="hero">
         <div class="container">
             <h1>Smart Signs</h1>
-            <p class="subtitle">Grupo 3 - Grado 8° "A"</p>
+            <p class="subtitle">Grupo 14 - Grado 8° "A"</p>
             <p class="description">
                 Innovación tecnológica para la comunicación inclusiva mediante
                 lenguaje de señas y tecnología Arduino
@@ -330,45 +401,45 @@
             <div class="members-grid">
                 <div class="member-card">
                     <div class="member-photo">
-                        <img src="./placeholder.svg?height=150&width=150&text=Foto" alt="Jhon Doe" class="member-image">
+                        <img src="./user.jpeg" alt="Anzora Gamero, Eddie Christopher" class="member-image">
                     </div>
-                    <div class="member-name">Jhon Doe</div>
+                    <div class="member-name">Anzora Gamero, Eddie Christopher</div>
                 </div>
                 <div class="member-card">
                     <div class="member-photo">
-                        <img src="./placeholder.svg?height=150&width=150&text=Foto" alt="Jhon Doe" class="member-image">
+                        <img src="./user.jpeg" alt="Arévalo Mármol, Alessandro René" class="member-image">
                     </div>
-                    <div class="member-name">Jhon Doe</div>
+                    <div class="member-name">Arévalo Mármol, Alessandro René</div>
                 </div>
                 <div class="member-card">
                     <div class="member-photo">
-                        <img src="./placeholder.svg?height=150&width=150&text=Foto" alt="Jhon Doe" class="member-image">
+                        <img src="./user.jpeg" alt="Argueta Baltrons, Josué Alejandro." class="member-image">
                     </div>
-                    <div class="member-name">Jhon Doe</div>
+                    <div class="member-name">Argueta Baltrons, Josué Alejandro.</div>
                 </div>
                 <div class="member-card">
                     <div class="member-photo">
-                        <img src="./placeholder.svg?height=150&width=150&text=Foto" alt="Jhon Doe" class="member-image">
+                        <img src="./user.jpeg" alt="Avalos Romero, Ivonne Jezabel" class="member-image">
                     </div>
-                    <div class="member-name">Jhon Doe</div>
+                    <div class="member-name">Avalos Romero, Ivonne Jezabel</div>
                 </div>
                 <div class="member-card">
                     <div class="member-photo">
-                        <img src="./placeholder.svg?height=150&width=150&text=Foto" alt="Jhon Doe" class="member-image">
+                        <img src="./user.jpeg" alt="Avelino González, Ariadna Alexandra" class="member-image">
                     </div>
-                    <div class="member-name">Jhon Doe</div>
+                    <div class="member-name">Avelino González, Ariadna Alexandra</div>
                 </div>
                 <div class="member-card">
                     <div class="member-photo">
-                        <img src="./placeholder.svg?height=150&width=150&text=Foto" alt="Jhon Doe" class="member-image">
+                        <img src="./user.jpeg" alt="Cabrera Tobar Arnaldo, Francisco." class="member-image">
                     </div>
-                    <div class="member-name">Jhon Doe</div>
+                    <div class="member-name">Cabrera Tobar, Arnaldo Francisco.</div>
                 </div>
                 <div class="member-card">
                     <div class="member-photo">
-                        <img src="./placeholder.svg?height=150&width=150&text=Foto" alt="Jhon Doe" class="member-image">
+                        <img src="./user.jpeg" alt="Calzada Rivas, Hesketh Javier." class="member-image">
                     </div>
-                    <div class="member-name">Jhon Doe</div>
+                    <div class="member-name">Calzada Rivas, Hesketh Javier.</div>
                 </div>
             </div>
         </div>
@@ -381,16 +452,16 @@
             <div class="description-content">
                 <h3>¿Qué es Smart Signs?</h3>
                 <p>
-                    Smart Signs es un proyecto innovador desarrollado por estudiantes del grado 8° "A"
-                    del Instituto Emiliani en El Salvador, que busca revolucionar la comunicación para personas con
-                    discapacidad auditiva mediante el uso de tecnología Arduino y sensores avanzados.
+                    Smart Signs es un prototipo innovador desarrollado por estudiantes de 8° "A"
+                    del Instituto Emiliani, que consiste en un guante que cuenta con sensores flexibles
+                    para detectar los movimientos del usuario y asi traducir el abecedario LESSA.
                 </p>
 
                 <div class="highlight-box">
                     <h3>🎯 Objetivo Principal</h3>
                     <p>
                         Crear un guante inteligente que detecte los movimientos de los dedos y traduzca
-                        automáticamente las señas del lenguaje de señas salvadoreño a texto o voz,
+                        automáticamente las señas del lenguaje de señas a texto,
                         facilitando la comunicación entre personas sordas y oyentes.
                     </p>
                 </div>
@@ -451,9 +522,10 @@
                 <div class="highlight-box">
                     <h3>🌟 ¿Por qué Smart Signs?</h3>
                     <p>
-                        Este proyecto surge de la necesidad de crear una solución tecnológica accesible
+                        Este prototipo surge de la necesidad de crear una solución tecnológica accesible
                         y económica que permita mejorar la calidad de vida de las personas con discapacidad
-                        auditiva en El Salvador, promoviendo su inclusión en todos los ámbitos de la sociedad.
+                        auditiva en El Salvador, promoviendo una comunicación más fluida entre las personas
+                        sordas y oyentes que no conocen el lenguaje de señas.
                     </p>
                 </div>
 
@@ -664,9 +736,9 @@
                     <p>Código principal desarrollado en C++ para el funcionamiento del guante Smart Signs.</p>
                 </div>
 
-                <div class="feature-card" style="text-align: left; margin: 2rem 0;">
-                    <h3>Código Principal (sketch.ino)</h3>
-                    <pre style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 1.4;">
+                <!-- <div class="feature-card" style="text-align: left; margin: 2rem 0;">
+                    <h3>Código Principal (sketch.ino)</h3> -->
+                    <!-- <pre style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 1.4;">
 <code>// Smart Signs - Guante Traductor de Lenguaje de Señas
 // Instituto Emiliani - Grado 8° "A" - El Salvador
 
@@ -733,10 +805,10 @@ char reconocerLetra(int f1, int f2, int f3, int f4, int f5) {
 
   return ' '; // Sin reconocimiento
 }</code>
-                </pre>
-            </div>
+                </pre> -->
+            <!-- </div> -->
 
-            <div class="feature-grid">
+            <!-- <div class="feature-grid">
                 <div class="feature-card">
                     <div class="feature-icon">📁</div>
                     <h3>Archivos del Proyecto</h3>
@@ -753,7 +825,7 @@ char reconocerLetra(int f1, int f2, int f3, int f4, int f5) {
                     • EEPROM.h - Almacenamiento<br>
                     • SoftwareSerial.h - Comunicación</p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
 
@@ -763,36 +835,5 @@ char reconocerLetra(int f1, int f2, int f3, int f4, int f5) {
             Juntos construimos un futuro más inclusivo 🤟
         </p>
     </div>
-
-    <script>
-        // Animación suave al hacer scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-on-scroll');
-                }
-            });
-        }, observerOptions);
-
-        // Observar todas las tarjetas y elementos
-        document.querySelectorAll('.member-card, .feature-card, .description-content').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Efecto parallax sutil para el fondo de señas
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelector('body::before');
-            if (parallax) {
-                const speed = scrolled * 0.1;
-                document.body.style.setProperty('--scroll-offset', `${speed}px`);
-            }
-        });
-    </script>
 </body>
 </html>
