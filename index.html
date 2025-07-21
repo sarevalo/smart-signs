@@ -199,6 +199,28 @@
             margin-bottom: 1rem;
         }
 
+        /* Estilo para videos de YouTube */
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* Aspect ratio 16:9 */
+            margin: 2rem 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 15px;
+        }
+
         /* Responsive */
         @media (max-width: 1200px) {
     .container {
@@ -255,6 +277,10 @@
     .highlight-box {
         padding: 1.5rem;
         margin: 1.5rem 0;
+    }
+
+    .video-container {
+        padding-bottom: 75%; /* Aspect ratio más cuadrado en móvil */
     }
 }
 
@@ -602,37 +628,51 @@
                     <p>Microcontrolador principal que procesa las señales de los sensores y ejecuta el algoritmo de reconocimiento de señas del proyecto Smart Signs.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
+                    <div class="component-photo">
+                        <img src="https://raw.githubusercontent.com/sarevalo/smart-signs/refs/heads/main/02.jpeg" alt="Arduino Uno" class="component-image">
+                    </div>
                     <h3>Resistencia</h3>
                     <p>Componentes electrónicos que limitan el flujo de corriente eléctrica y estabilizan las señales de los sensores de flexión.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🔌</div>
+                    <div class="component-photo">
+                        <img src="https://raw.githubusercontent.com/sarevalo/smart-signs/refs/heads/main/03.jpeg" alt="Arduino Uno" class="component-image">
+                    </div>
                     <h3>Cable UTP</h3>
                     <p>Cable de par trenzado utilizado para las conexiones entre los sensores, Arduino y demás componentes del sistema.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📡</div>
+                    <div class="component-photo">
+                        <img src="https://raw.githubusercontent.com/sarevalo/smart-signs/refs/heads/main/04.jpeg" alt="Arduino Uno" class="component-image">
+                    </div>
                     <h3>Resistencias Flex</h3>
                     <p>Sensores de flexión que cambian su resistencia eléctrica al doblarse, detectando los movimientos de cada dedo del guante.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🔋</div>
+                    <div class="component-photo">
+                        <img src="https://raw.githubusercontent.com/sarevalo/smart-signs/refs/heads/main/06.jpeg" alt="Arduino Uno" class="component-image">
+                    </div>
                     <h3>Batería Recargable</h3>
                     <p>Fuente de alimentación portátil que proporciona energía al sistema, permitiendo el uso autónomo del dispositivo Smart Signs.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🔧</div>
+                    <div class="component-photo">
+                        <img src="https://raw.githubusercontent.com/sarevalo/smart-signs/refs/heads/main/07.jpeg" alt="Arduino Uno" class="component-image">
+                    </div>
                     <h3>Placa Fenólica Perforada</h3>
                     <p>Base de circuito impreso donde se montan y conectan todos los componentes electrónicos del sistema de manera organizada.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🧤</div>
+                    <div class="component-photo">
+                        <img src="https://raw.githubusercontent.com/sarevalo/smart-signs/refs/heads/main/08.jpeg" alt="Arduino Uno" class="component-image">
+                    </div>
                     <h3>Guantes</h3>
                     <p>Guantes ergonómicos donde se integran los sensores de flexión, diseñados para ser cómodos y permitir el movimiento natural de los dedos.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📺</div>
+                    <div class="component-photo">
+                        <img src="https://raw.githubusercontent.com/sarevalo/smart-signs/refs/heads/main/09.jpeg" alt="Arduino Uno" class="component-image">
+                    </div>
                     <h3>Pantalla</h3>
                     <p>Display que muestra en tiempo real las letras reconocidas por el sistema, proporcionando retroalimentación visual al usuario.</p>
                 </div>
@@ -648,33 +688,19 @@
                 <div class="highlight-box">
                     <h3>🔌 Diagrama de Conexiones</h3>
                     <p>Esquema detallado de las conexiones entre Arduino, sensores y componentes del sistema Smart Signs.</p>
-                    <div style="text-align: center; margin: 2rem 0;">
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card">
                         <img src="https://raw.githubusercontent.com/sarevalo/smart-signs/157b0cd1fc1379db04bf2509c6aaca17ab652285/esquema.png" alt="Diagrama de conexiones" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
                     </div>
                 </div>
 
-                <h3>Componentes del Sistema</h3>
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">🎛️</div>
-                        <h3>Arduino Uno</h3>
-                        <p>Microcontrolador principal conectado a los pines analógicos A0-A4</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">📡</div>
-                        <h3>Sensores de Flexión</h3>
-                        <p>5 sensores conectados a cada dedo del guante con resistencias pull-down</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">📺</div>
-                        <h3>Display LCD</h3>
-                        <p>Pantalla 16x2 para mostrar las letras reconocidas</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🔋</div>
-                        <h3>Alimentación</h3>
-                        <p>Batería de 9V con regulador de voltaje para estabilidad</p>
-                    </div>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/nvSDIEFt6CI?si=sc0Ezmd4ieTQMSar"
+                            title="Diagrama del Sistema Smart Signs"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                    </iframe>
                 </div>
             </div>
         </div>
@@ -725,6 +751,14 @@
                         <h3>Salida</h3>
                         <p>Mostrar resultado en pantalla LCD</p>
                     </div>
+                </div>
+
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/O5L8h9jjlJg?si=lcC7GHa6h8lJO49a"
+                            title="Flujograma del Algoritmo Smart Signs"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                    </iframe>
                 </div>
             </div>
         </div>
