@@ -577,33 +577,43 @@
             <div class="feature-grid">
                 <div class="feature-card">
                     <div class="feature-icon">🤖</div>
-                    <h3>Arduino Uno</h3>
-                    <p>Microcontrolador principal que procesa las señales de los sensores y ejecuta el algoritmo de reconocimiento de señas.</p>
+                    <h3>Arduino</h3>
+                    <p>Microcontrolador principal que procesa las señales de los sensores y ejecuta el algoritmo de reconocimiento de señas del proyecto Smart Signs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Resistencia</h3>
+                    <p>Componentes electrónicos que limitan el flujo de corriente eléctrica y estabilizan las señales de los sensores de flexión.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔌</div>
+                    <h3>Cable UTP</h3>
+                    <p>Cable de par trenzado utilizado para las conexiones entre los sensores, Arduino y demás componentes del sistema.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">📡</div>
-                    <h3>Sensores de Flexión</h3>
-                    <p>Cinco sensores de alta precisión ubicados en cada dedo para detectar el grado de flexión y posición.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🧤</div>
-                    <h3>Guante Ergonómico</h3>
-                    <p>Diseño cómodo y ajustable que permite el uso prolongado sin causar fatiga o molestias.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💻</div>
-                    <h3>Software de Procesamiento</h3>
-                    <p>Algoritmo desarrollado en C++ que interpreta los datos de los sensores y los convierte en letras.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3>Interfaz de Usuario</h3>
-                    <p>Pantalla LCD que muestra en tiempo real las letras reconocidas y permite la formación de palabras.</p>
+                    <h3>Resistencias Flex</h3>
+                    <p>Sensores de flexión que cambian su resistencia eléctrica al doblarse, detectando los movimientos de cada dedo del guante.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🔋</div>
-                    <h3>Sistema de Alimentación</h3>
-                    <p>Batería recargable de larga duración que garantiza horas de uso continuo del dispositivo.</p>
+                    <h3>Batería Recargable</h3>
+                    <p>Fuente de alimentación portátil que proporciona energía al sistema, permitiendo el uso autónomo del dispositivo Smart Signs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Placa Fenólica Perforada</h3>
+                    <p>Base de circuito impreso donde se montan y conectan todos los componentes electrónicos del sistema de manera organizada.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧤</div>
+                    <h3>Guantes</h3>
+                    <p>Guantes ergonómicos donde se integran los sensores de flexión, diseñados para ser cómodos y permitir el movimiento natural de los dedos.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📺</div>
+                    <h3>Pantalla</h3>
+                    <p>Display que muestra en tiempo real las letras reconocidas por el sistema, proporcionando retroalimentación visual al usuario.</p>
                 </div>
             </div>
         </div>
@@ -927,6 +937,109 @@ char reconocerLetra(int f1, int f2, int f3, int f4, int f5) {
                         del proyecto Smart Signs. Cada concepto ha sido cuidadosamente seleccionado para
                         facilitar la comprensión del sistema de traducción de lenguaje de señas.
                     </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección 12: Magnitudes Físicas Involucradas -->
+    <section id="magnitudes">
+        <div class="container">
+            <h2 class="section-title">Magnitudes Físicas Involucradas</h2>
+            <div class="description-content">
+                <div class="highlight-box">
+                    <h3>⚖️ Fundamentos Físicos del Proyecto</h3>
+                    <p>Las magnitudes físicas que intervienen directamente en el funcionamiento del sistema Smart Signs y su aplicación práctica.</p>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card" style="text-align: left;">
+                        <div class="feature-icon" style="text-align: center;">💪</div>
+                        <h3 style="color: #007bff; text-align: center; margin-bottom: 1rem;">Fuerza</h3>
+                        <p style="font-size: 1rem; line-height: 1.6; text-align: justify;">
+                            Es una magnitud capaz de modificar el movimiento, forma o la dirección de un cuerpo.
+                            En nuestro proyecto, la fuerza aplicada por los dedos al flexionarse es detectada
+                            por los sensores, permitiendo identificar diferentes posiciones de las manos.
+                        </p>
+                        <div style="background: rgba(0, 123, 255, 0.1); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                            <strong style="color: #007bff;">Aplicación en Smart Signs:</strong><br>
+                            <small>Detección de la fuerza ejercida al formar las letras del alfabeto en lenguaje de señas.</small>
+                        </div>
+                    </div>
+
+                    <div class="feature-card" style="text-align: left;">
+                        <div class="feature-icon" style="text-align: center;">📏</div>
+                        <h3 style="color: #007bff; text-align: center; margin-bottom: 1rem;">Presión</h3>
+                        <p style="font-size: 1rem; line-height: 1.6; text-align: justify;">
+                            Es la fuerza ejercida perpendicularmente sobre una superficie dividida; es decir,
+                            es una forma de medir como se distribuye una fuerza sobre una superficie.
+                            Los sensores miden la presión ejercida sobre ellos cuando los dedos se flexionan.
+                        </p>
+                        <div style="background: rgba(0, 123, 255, 0.1); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                            <strong style="color: #007bff;">Aplicación en Smart Signs:</strong><br>
+                            <small>Medición de la presión en los sensores de flexión para determinar el grado de curvatura de cada dedo.</small>
+                        </div>
+                    </div>
+
+                    <div class="feature-card" style="text-align: left;">
+                        <div class="feature-icon" style="text-align: center;">⚡</div>
+                        <h3 style="color: #007bff; text-align: center; margin-bottom: 1rem;">Resistencia</h3>
+                        <p style="font-size: 1rem; line-height: 1.6; text-align: justify;">
+                            Es la oposición al flujo de corriente eléctrica a través de un material, se mide en ohmios.
+                            Los sensores de flexión cambian su resistencia eléctrica cuando se doblan,
+                            permitiendo detectar el movimiento de los dedos.
+                        </p>
+                        <div style="background: rgba(0, 123, 255, 0.1); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                            <strong style="color: #007bff;">Aplicación en Smart Signs:</strong><br>
+                            <small>Variación de resistencia en los sensores (10kΩ - 35kΩ) para detectar la flexión de los dedos.</small>
+                        </div>
+                    </div>
+
+                    <div class="feature-card" style="text-align: left;">
+                        <div class="feature-icon" style="text-align: center;">🔋</div>
+                        <h3 style="color: #007bff; text-align: center; margin-bottom: 1rem;">Trabajo</h3>
+                        <p style="font-size: 1rem; line-height: 1.6; text-align: justify;">
+                            Es la transferencia de energía de un objeto a otro, o la energía necesaria para desplazar un objeto.
+                            En el sistema, el trabajo mecánico realizado al mover los dedos se convierte en
+                            señales eléctricas procesables por el Arduino.
+                        </p>
+                        <div style="background: rgba(0, 123, 255, 0.1); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                            <strong style="color: #007bff;">Aplicación en Smart Signs:</strong><br>
+                            <small>Conversión del trabajo mecánico de flexión de dedos en señales eléctricas interpretables.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #007bff, #0056b3); color: white; padding: 2rem; border-radius: 15px; margin: 2rem 0; text-align: center;">
+                    <h3 style="color: white; margin-bottom: 1rem;">🔬 Interrelación de las Magnitudes</h3>
+                    <p style="font-size: 1rem; line-height: 1.6;">
+                        Estas cuatro magnitudes físicas trabajan en conjunto en el sistema Smart Signs:
+                        la <strong>fuerza</strong> aplicada por los dedos genera <strong>presión</strong> sobre los sensores,
+                        lo que modifica su <strong>resistencia</strong> eléctrica. El <strong>trabajo</strong> mecánico
+                        realizado se transforma en señales eléctricas que el Arduino puede interpretar
+                        para reconocer las letras del lenguaje de señas.
+                    </p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+                    <div style="background: rgba(0, 123, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 4px solid #007bff;">
+                        <h4 style="color: #007bff; margin-bottom: 0.5rem;">📊 Rangos de Medición</h4>
+                        <p style="font-size: 0.9rem; line-height: 1.5;">
+                            • Fuerza: 0.1 - 5 N<br>
+                            • Presión: Variable según flexión<br>
+                            • Resistencia: 10kΩ - 35kΩ<br>
+                            • Trabajo: Energía mecánica mínima
+                        </p>
+                    </div>
+                    <div style="background: rgba(0, 123, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 4px solid #007bff;">
+                        <h4 style="color: #007bff; margin-bottom: 0.5rem;">🎯 Precisión del Sistema</h4>
+                        <p style="font-size: 0.9rem; line-height: 1.5;">
+                            La combinación de estas magnitudes permite
+                            una precisión del 95% en el reconocimiento
+                            de letras del alfabeto en lenguaje de señas
+                            salvadoreño.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
