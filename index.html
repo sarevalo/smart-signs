@@ -379,6 +379,25 @@
         .member-image:hover {
             transform: scale(1.05);
         }
+
+        .component-photo {
+            margin-bottom: 1rem;
+        }
+
+        .component-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #007bff;
+            transition: transform 0.3s ease;
+            background: white;
+            padding: 10px;
+        }
+
+        .component-image:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -576,7 +595,9 @@
             <h2 class="section-title">Tecnología Utilizada</h2>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
+                    <div class="component-photo">
+                        <img src="https://raw.githubusercontent.com/sarevalo/smart-signs/refs/heads/main/01.jpeg" alt="Arduino Uno" class="component-image">
+                    </div>
                     <h3>Arduino</h3>
                     <p>Microcontrolador principal que procesa las señales de los sensores y ejecuta el algoritmo de reconocimiento de señas del proyecto Smart Signs.</p>
                 </div>
